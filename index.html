@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Chord Diagram Viewer</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .ctn {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        .adtn {
+            padding: 10px;
+            background-color: rgb(38, 33, 46);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ctn">
+        <ins id="chx" class="scales_chords_api"
+             chord="G"
+             width="400"
+             height="200"
+             instrument="guitar">
+        </ins>
+        <div class="adtn">
+            <ins id="__chx" class="scales_chords_api" chord="Eb7" instrument="guitar" output="sound"></ins>
+        </div>
+    </div>
+    
+    <script>
+        function parseHashPrms()
+        {
+            const parts = location.hash.split('#/')[1].replace(/^\//, '').split('/')
+
+            const instrument = parts[0] || 'guitar'
+            const chord = parts[1] || 'C7'
+            const output = parts[2] || 'image' 
+
+            return { instrument, chord, output }
+        }
+
+        document.getElementById('chx').setAttribute('chord', parseHashPrms().chord)
+        document.getElementById('__chx').setAttribute('chord', parseHashPrms().chord)
+        document.getElementById('chx').setAttribute('instrument', parseHashPrms().instrument)
+        document.getElementById('__chx').setAttribute('instrument', parseHashPrms().instrument)
+    </script>
+    <!-- Script da API -->
+    <script src="https://www.scales-chords.com/api/scales-chords-api.js"></script>
+</body>
+</html>
