@@ -48,6 +48,10 @@
             return { instrument, chord, output }
         }
 
+        window.addEventListener('hashchange', ()=>{
+            location.reload()
+        })
+
         document.getElementById('chx').setAttribute('chord', parseHashPrms().chord)
         document.getElementById('__chx').setAttribute('chord', parseHashPrms().chord)
         document.getElementById('chx').setAttribute('instrument', parseHashPrms().instrument)
